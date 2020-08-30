@@ -1,4 +1,6 @@
-package ua.skillsup.practice;
+package ua.skillsup.practice.dao;
+
+import ua.skillsup.practice.dao.entity.ExampleEntity;
 
 import java.util.List;
 

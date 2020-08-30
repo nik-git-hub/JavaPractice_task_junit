@@ -1,7 +1,11 @@
-package ua.skillsup.practice;
+package ua.skillsup.practice.service;
+
+import ua.skillsup.practice.dao.ExampleDao;
+import ua.skillsup.practice.dao.entity.ExampleEntity;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -26,4 +30,5 @@ public interface ExampleService {
 	 *      the value is actual average cost of all items stored during that day
 	 */
 	Map<LocalDate, BigDecimal> getStatistic();
+
 }
