@@ -39,7 +39,7 @@ public class ExampleServiceImpl implements ExampleService {
         Map<LocalDate, Double> mapValueDouble = list
                 .stream()
                 .collect(Collectors.groupingBy(s -> s.getDateIn().atZone(ZoneOffset.UTC).toLocalDate(),
-                        Collectors.averagingDouble(p -> (p.getPrice().doubleValue()))));
+                        Collectors.averagingDouble(p -> p.getPrice().doubleValue())));
 
         return mapValueDouble.entrySet().stream()
                 .collect(Collectors.toMap(Map.Entry::getKey,
