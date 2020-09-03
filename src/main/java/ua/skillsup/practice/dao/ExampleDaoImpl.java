@@ -16,9 +16,8 @@ public class ExampleDaoImpl implements ExampleDao {
                 .filter( s -> s.equals(entity.getTitle().toUpperCase())).count() > 0) {
             return false;
         }
-
         list.add(entity);
-        return true;
+        return list.contains(entity);
     }
 
     public List<ExampleEntity> findAll() throws ExampleNetworkException {

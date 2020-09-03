@@ -21,14 +21,16 @@ public class ExampleServiceImpl implements ExampleService {
     public ExampleDao exampleDao = new ExampleDaoImpl();
 
     public void addNewItem(String title, BigDecimal price) {
-        Boolean result;
         if (title.trim().length() < MIN_NUMBER_CHARACTERS
                 || title.trim().length() > MAX_NUMBER_CHARACTERS
                 || price.compareTo(LOWEST_LIMIT_PRICE) < 0)
         {
-            result = false;
+            System.out.println("Wrong input!");
         }
-        result = exampleDao.store(new ExampleEntity(++id, title.trim(), price));
+
+        if (!exampleDao.store(new ExampleEntity(++id, title.trim(), price))) {
+            System.out.println("The connection to the base database failed.");
+        }
     }
 
     public Map<LocalDate, BigDecimal> getStatistic() {
@@ -36,8 +38,8 @@ public class ExampleServiceImpl implements ExampleService {
 
         Map<LocalDate, Double> mapValueDouble = list
                 .stream()
-                .collect(Collectors.groupingBy((s) -> s.getDateIn().atZone(ZoneOffset.UTC).toLocalDate(),
-                        Collectors.averagingDouble((p) -> (p.getPrice().doubleValue()))));
+                .collect(Collectors.groupingBy(s -> s.getDateIn().atZone(ZoneOffset.UTC).toLocalDate(),
+                        Collectors.averagingDouble(p -> (p.getPrice().doubleValue()))));
 
         return mapValueDouble.entrySet().stream()
                 .collect(Collectors.toMap(Map.Entry::getKey,
